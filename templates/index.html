@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{%block title%}
+
+{% endblock %}
+
+{% block body %}
+<h1>Главная страница</h1>
+<video autoplay muted loop controls width='600'>
+    <source src="{{ url_for('static', 
+filename='videos/Kira (' ~ id ~ ').mp4') }}"
+type="video/mp4">
+    Ваш браузер не поддерживает элемент <code>video</code>
+</video>
+
+<p>Текущий ID: {{ id }}</p>
+<p>Путь к видео: {{ url_for('static', filename='videos/Kira (' ~ id ~ ').mp4') }}</p>
+{% endblock %}
