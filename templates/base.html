@@ -4,8 +4,255 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: hue-rotate 5s linear infinite;
+            padding: 10px 0;
+            font-weight: 700;
+        }
+        
+        @keyframes hue-rotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        .video-container {
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 0 auto 3rem;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: fade-in 1s ease-out;
+        }
+        
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .video-container::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.05)
+            );
+            transform: rotate(30deg);
+            z-index: 0;
+        }
+        
+        video {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        video:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        }
+        
+        .code-theme {
+            font-family: 'JetBrains Mono', monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-theme::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: rgba(60, 60, 60, 0.7);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        
+        .code-theme::after {
+            content: "● ● ●";
+            position: absolute;
+            top: 8px;
+            left: 15px;
+            color: #ff5f56;
+            font-size: 16px;
+            letter-spacing: 3px;
+        }
+        
+        .code-line {
+            margin-bottom: 8px;
+            white-space: nowrap;
+        }
+        
+        .comment { color: #6a9955; }
+        .keyword { color: #569cd6; }
+        .function { color: #dcdcaa; }
+        .string { color: #ce9178; }
+        .number { color: #b5cea8; }
+        
+        .tech-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .tech-icon {
+            font-size: 2.5rem;
+            animation: pulse 2s infinite;
+            filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.3));
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .tech-icon:nth-child(1) { color: #61dafb; animation-delay: 0s; }
+        .tech-icon:nth-child(2) { color: #f7df1e; animation-delay: 0.5s; }
+        .tech-icon:nth-child(3) { color: #264de4; animation-delay: 1s; }
+        .tech-icon:nth-child(4) { color: #e34f26; animation-delay: 1.5s; }
+        .tech-icon:nth-child(5) { color: #339933; animation-delay: 2s; }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .glow {
+            text-shadow: 0 0 10px rgba(18, 194, 233, 0.7),
+                         0 0 20px rgba(18, 194, 233, 0.5),
+                         0 0 30px rgba(18, 194, 233, 0.3);
+            animation: glow-pulse 2s infinite alternate;
+        }
+        
+        @keyframes glow-pulse {
+            from { text-shadow: 0 0 10px rgba(18, 194, 233, 0.7),
+                  0 0 20px rgba(18, 194, 233, 0.5),
+                  0 0 30px rgba(18, 194, 233, 0.3); }
+            to { text-shadow: 0 0 15px rgba(18, 194, 233, 0.8),
+                  0 0 25px rgba(18, 194, 233, 0.6),
+                  0 0 35px rgba(18, 194, 233, 0.4); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .video-container {
+                padding: 15px;
+            }
+            
+            .tech-icon {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    {% block body %}{% endblock %}
+    <div class="container">
+        <header>
+            <h1>Главная страница</h1>
+            <p class="glow">Добро пожаловать в мир IT-технологий!</p>
+        </header>
+        
+        <div class="video-container">
+            <video autoplay muted loop controls>
+                <source src="{{ url_for('static', filename='videos/Kira (' ~ id ~ ').mp4') }}" type="video/mp4">
+                Ваш браузер не поддерживает элемент <code>video</code>
+            </video>
+        </div>
+        
+        <div class="code-theme">
+            <div class="code-line"><span class="comment">// Приветствие для посетителя сайта</span></div>
+            <div class="code-line"><span class="keyword">function</span> <span class="function">welcomeMessage</span>() {</div>
+            <div class="code-line">  <span class="keyword">const</span> message = <span class="string">"Добро пожаловать на нашу IT-платформу!"</span>;</div>
+            <div class="code-line">  <span class="keyword">return</span> console.<span class="function">log</span>(message);</div>
+            <div class="code-line">}</div>
+            <div class="code-line">&nbsp;</div>
+            <div class="code-line"><span class="comment">// Инициализация видеоплеера</span></div>
+            <div class="code-line"><span class="keyword">const</span> videoPlayer = <span class="function">initVideoPlayer</span>(<span class="string">"Kira ({{ id }})"</span>);</div>
+            <div class="code-line">videoPlayer.<span class="function">play</span>();</div>
+        </div>
+        
+        <div class="tech-icons">
+            <span>⚛️</span> <!-- React -->
+            <span>🚀</span> <!-- JS -->
+            <span>🎨</span> <!-- CSS -->
+            <span>📱</span> <!-- HTML -->
+            <span>🔗</span> <!-- Node.js -->
+        </div>
+        
+        <footer>
+            <p>© 2023 IT-Платформа | Современные технологии для современных людей</p>
+        </footer>
+    </div>
 </body>
 </html>

@@ -159,6 +159,65 @@
         .wish-card h3 i {
             margin-right: 0.5rem;
         }
+
+        /* Стили для IT-кнопок */
+        .it-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .it-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem 1rem;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .it-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        
+        .it-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        
+        .it-button:hover::before {
+            opacity: 0.3;
+        }
+        
+        .it-button .icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .it-button .text {
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
         
         .tech-icons {
             display: flex;
@@ -217,6 +276,16 @@
             .wishes {
                 grid-template-columns: 1fr;
             }
+            
+            .it-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .it-buttons {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -225,6 +294,9 @@
         <header>
             <h1>С Днём Рождения, Кирилл!</h1>
             <p class="subtitle">Поздравляем от всей IT-команды!</p>
+            <p class="subtitle">Технический Директор - Пых_Пыхыч (Мишутка)</p>
+            <p class="subtitle">Креативный Директор - Даттебайо (Паша)</p>
+            <p class="subtitle">Директор по эксплуатации базовых станций (вышек) - Dobrynya Ydzumaki (Владюсик)</p>
         </header>
         
         <section class="hero">
@@ -262,6 +334,42 @@
                 <p>Понимающих коллег, адекватных менеджеров и вдохновляющих проектов. Пусть работа приносит удовольствие!</p>
             </div>
         </section>
+
+        <!-- Блок с IT-кнопками -->
+        <div class="it-buttons">
+            <a href="http://127.0.0.1:5000/1" class="it-button">
+                <div class="icon">💻</div>
+                <div class="text">Тест-Кейс #1</div>
+            </a>
+            <a href="http://127.0.0.1:5000/2" class="it-button">
+                <div class="icon">🔍</div>
+                <div class="text">Тест-Кейс #2</div>
+            </a>
+            <a href="http://127.0.0.1:5000/3" class="it-button">
+                <div class="icon">📊</div>
+                <div class="text">Тест-Кейс #3</div>
+            </a>
+            <a href="http://127.0.0.1:5000/4" class="it-button">
+                <div class="icon">🌐</div>
+                <div class="text">Тест-Кейс #4</div>
+            </a>
+            <a href="http://127.0.0.1:5000/5" class="it-button">
+                <div class="icon">📱</div>
+                <div class="text">Тест-Кейс #5</div>
+            </a>
+            <a href="http://127.0.0.1:5000/6" class="it-button">
+                <div class="icon">🤖</div>
+                <div class="text">Тест-Кейс #6</div>
+            </a>
+            <a href="http://127.0.0.1:5000/7" class="it-button">
+                <div class="icon">☁️</div>
+                <div class="text">Тест-Кейс #7</div>
+            </a>
+            <a href="http://127.0.0.1:5000/8" class="it-button">
+                <div class="icon">🔒</div>
+                <div class="text">Тест-Кейс #8</div>
+            </a>
+        </div>
         
         <div class="tech-icons">
             <span>⚛️</span> <!-- React -->
